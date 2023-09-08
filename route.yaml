@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: clair
+  labels:
+    quay-component: clair
+spec:
+  to:
+    kind: Service
+    name: clair
+    weight: 100
+  port:
+    targetPort: clair-http
+  wildcardPolicy: None
