@@ -1,0 +1,31 @@
+---
+introspection_addr: 0.0.0.0:8089
+http_listen_addr: 0.0.0.0:8080
+log_level: debug
+indexer:
+  connstring: 'postgresql://clair:postgres@postgres/clair'
+  scanlock_retry: 10
+  layer_scan_concurrency: 5
+  migrations: true
+notifier:
+  connstring: 'postgresql://clair:postgres@postgres/clair'
+  delivery_interval: 1m
+  poll_interval: 5m
+  migrations: true
+matcher:
+  connstring: 'postgresql://clair:postgres@postgres/clair'
+  max_conn_pool: 100
+  run: ""
+  migrations: true
+  indexer_addr: clair-indexer
+
+trace:
+  name: "jaeger"
+  probability: 1
+  jaeger:
+    agent:
+      endpoint: "localhost:6831"
+    service_name: "clair"
+
+metrics:
+  name: "prometheus"
